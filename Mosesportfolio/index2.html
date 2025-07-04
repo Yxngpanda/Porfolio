@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <style>
+    :root {
+      --primary-color: #6366f1;
+      --secondary-color: #4f46e5;
+      --text-color: #1f2937;
+      --bg-color: #f9fafb;
+      --white: #ffffff;
+      --gray-light: #f3f4f6;
+      --gray-dark: #4b5563;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: var(--white);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .menu li {
+      position: relative;
+    }
+
+    .menu li a,
+    .dropdown-toggle {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .menu li a:hover,
+    .dropdown-toggle:hover {
+      color: var(--primary-color);
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--white);
+      min-width: 150px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    .dropdown li {
+      display: block;
+    }
+
+    .dropdown li a {
+      display: block;
+      padding: 0.75rem 1rem;
+    }
+
+    .dropdown li a:hover {
+      background-color: var(--gray-light);
+    }
+
+    .menu li:hover .dropdown {
+      display: block;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--text-color);
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background-color: var(--white);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .dropdown {
+        position: static;
+        box-shadow: none;
+        background-color: transparent;
+        padding-left: 1rem;
+      }
+
+      .dropdown li a {
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .hero {
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      color: white;
+      text-align: center;
+      padding: 8rem 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      background-color: var(--white);
+      color: var(--primary-color);
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #e0e7ff;
+    }
+
+    .projects,
+    .about,
+    .contact {
+      text-align: center;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background-color: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .project-card .content {
+      padding: 1rem;
+    }
+
+    footer {
+      background-color: #1f2937;
+      color: #d1d5db;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input,
+    textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    button[type="submit"] {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: var(--secondary-color);
+    }
+
+    .about img {
+      border-radius: 999px;
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      margin: 1rem auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">MyPortfolio</div>
+      <ul class="menu" id="menu">
+        <li><a href="#home">Home</a></li>
+        <li class="dropdown-container">
+          <span class="dropdown-toggle">Projects</span>
+          <ul class="dropdown">
+            <li><a href="#web">Web Dev</a></li>
+            <li><a href="#apps">Mobile Apps</a></li>
+            <li><a href="#design">UI/UX</a></li>
+          </ul>
+        </li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="mobile-menu-btn" onclick="toggleMenu()">☰</div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <h1>Hello, I'm Alex Carter</h1>
+    <p>Creative Web Developer crafting beautiful and functional digital experiences.</p>
+    <a href="#contact" class="btn-primary">Get In Touch</a>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Featured Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <img src="https://picsum.photos/id/1018/400/250 " alt="Project 1">
+        <div class="content">
+          <h3>Project Title 1</h3>
+          <p>A brief description of the project showcasing technologies used and outcomes achieved.</p>
+          <a href="#">View Project</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://picsum.photos/id/1015/400/250 " alt="Project 2">
+        <div class="content">
+          <h3>Project Title 2</h3>
+          <p>A brief description of the project showcasing technologies used and outcomes achieved.</p>
+          <a href="#">View Project</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://picsum.photos/id/1016/400/250 " alt="Project 3">
+        <div class="content">
+          <h3>Project Title 3</h3>
+          <p>A brief description of the project showcasing technologies used and outcomes achieved.</p>
+          <a href="#">View Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <img src="https://picsum.photos/id/1027/300/300 " alt="Alex Carter">
+    <p>I'm a passionate web developer with over 5 years of experience creating responsive, user-friendly websites and applications.</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 MyPortfolio. All rights reserved.</p>
+  </footer>
+
+  <!-- JS for Menu Toggle -->
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
