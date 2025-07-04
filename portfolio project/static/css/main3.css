@@ -1,0 +1,53 @@
+/* Reset */
+/* Glass Card Styling */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-grid .service-card,
+.credential-grid .credential-card {
+  @extend .glass-card;
+}
+
+/* Fix image fit */
+.object-cover {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Form Inputs with Glass Look */
+.contact input,
+.contact textarea {
+  @extend .glass-card;
+  width: 100%;
+  color: #eee;
+  border: none;
+  outline: none;
+}
+
+.contact button {
+  @extend .glass-card;
+  width: 100%;
+  background: #00bcd4;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact button:hover {
+  background: #0097a7;
+  transform: scale(1.02);
+}
